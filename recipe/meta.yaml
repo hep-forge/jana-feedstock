@@ -1,0 +1,57 @@
+{% set versions = {
+    "2026.02.00": "431a70d56019cf076fe80dc4317849ef5ad448173d4a0a7bf0325607aafba545"
+} %}
+
+{% set version = environ.get('COMMIT_VERSION', None) %}
+{% set version = version or versions.keys()|first %}
+{% set version = version|string %}
+
+build:
+  number: 0
+  string: "root{{ root.replace('.', '') }}"
+  skip: true  # [win]
+
+package:
+  name: {{ environ.get('ANACONDA_PACKAGE', "jana2")|string|lower }}
+  version: {{ environ.get('ANACONDA_VERSION', version)|replace("-", ".") }}
+
+source:
+  url: https://github.com/JeffersonLab/JANA2/archive/refs/tags/v{{ version }}.tar.gz
+  {% if versions.get(version, None) %}
+  sha256: {{ versions.get(version) }}
+  {% endif %}
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}
+    - cmake
+    - make
+  host:
+    - root {{ root }}.*
+  run:
+    - root {{ root }}.*
+
+test:
+  commands:
+    - jana --version
+    - test -f ${PREFIX}/lib/libJANA.so        # [linux]
+    - test -f ${PREFIX}/lib/libJANA.dylib     # [osx]
+
+about:
+  home: https://github.com/JeffersonLab/JANA2
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: "JANA2 is a C++ framework for multi-threaded HENP event reconstruction."
+  description: |
+    JANA2 is a C++ framework for multi-threaded High Energy and Nuclear Physics
+    (HENP) event reconstruction. It is a modernized rewrite of its predecessor
+    (JANA), preserving its valued features while adapting to contemporary
+    experimental requirements. JANA2 emphasizes developer accessibility with a
+    straightforward API for accessing event data and supports integration with
+    ROOT, PODIO, and other HEP software frameworks.
+  dev_url: https://github.com/JeffersonLab/JANA2
+
+extra:
+  recipe-maintainers:
+    - meiyasan

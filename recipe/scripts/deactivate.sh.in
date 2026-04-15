@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Restore JANA_HOME to its previous value (or unset it)
+if [ ! -z "${CONDA_BACKUP_JANA_HOME}" ]; then
+    export JANA_HOME="${CONDA_BACKUP_JANA_HOME}"
+    unset CONDA_BACKUP_JANA_HOME
+else
+    unset JANA_HOME
+fi

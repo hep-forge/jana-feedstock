@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Set JANA_HOME so plugins and configs can locate the JANA2 installation
+if [ ! -z "${JANA_HOME+x}" ]; then
+    export CONDA_BACKUP_JANA_HOME="${JANA_HOME}"
+fi
+if [ -z "${JANA_HOME+x}" ]; then
+    export JANA_HOME="${CONDA_PREFIX}"
+fi
