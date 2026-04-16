@@ -2,8 +2,6 @@ c_compiler:
 - gcc
 c_compiler_version:
 - '14'
-cdt_name:
-- conda
 channel_sources:
 - conda-forge
 channel_targets:
@@ -18,6 +16,10 @@ root:
 - '6.38'
 target_platform:
 - linux-64
+xerces_c:
+- '3.3'
+zeromq:
+- 4.3.5
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version

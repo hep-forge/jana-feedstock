@@ -9,7 +9,12 @@ cd ..
 cmake -S . -B build \
     -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
     -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_CXX_STANDARD=$(root-config --cxxstandard) \
     -DUSE_ROOT=ON \
+    -DUSE_PYTHON=ON \
+    -DUSE_ZEROMQ=ON \
+    -DUSE_XERCES=ON \
+    -DUSE_PODIO=ON \
     -DBUILD_EXAMPLES=OFF \
     -DBUILD_TESTS=OFF
 

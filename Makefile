@@ -13,6 +13,7 @@ render:
 	@echo "!Makefile" >> .gitignore
 	@echo "!.github"  >> .gitignore
 	@git add .gitignore
+	@find -name conda-build.yml -delete
 
 ANACONDA_TOKEN := "$(HOME)/.conda-smithy/anaconda.token"
 anaconda:
@@ -28,4 +29,9 @@ anaconda:
         done
 
 debug:
-	@conda debug .
+	@OUTPUT_ID=$$(conda render . --output 2>&1 | grep -E '\.(tar\.bz2|conda)$$' | sort | tail -1 | xargs -r basename); \
+	 if [ -n "$$OUTPUT_ID" ]; then \
+	   conda debug . --output-id "$$OUTPUT_ID"; \
+	 else \
+	   conda debug .; \
+	 fi
