@@ -14,6 +14,7 @@ cmake -S . -B build \
     -DUSE_PYTHON=ON \
     -DUSE_ZEROMQ=ON \
     -DUSE_XERCES=ON \
+    -DXercesC_DIR="${PREFIX}" \
     -DUSE_PODIO=ON \
     -DBUILD_EXAMPLES=OFF \
     -DBUILD_TESTS=OFF
