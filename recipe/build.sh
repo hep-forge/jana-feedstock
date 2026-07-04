@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# CMake 4 removed compat with cmake_minimum_required(<3.5); the bundled
+# src/python/externals/pybind11-2.10.3 still declares one.
+export CMAKE_POLICY_VERSION_MINIMUM=3.5
+
 # Install conda activate/deactivate scripts (sets JANA_HOME)
 mkdir -p build-scripts
 cd build-scripts
