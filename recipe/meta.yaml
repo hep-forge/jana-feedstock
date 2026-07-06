@@ -41,7 +41,9 @@ requirements:
 
 test:
   commands:
-    - jana --version
+    # jana.cc's --version handler intentionally `return -1;` (exit 255) after
+    # printing, so a plain `jana --version` always registers as a test failure.
+    - (jana --version; test $? -eq 255)
     - test -f ${PREFIX}/lib/libJANA.so        # [linux]
     - test -f ${PREFIX}/lib/libJANA.dylib     # [osx]
 
