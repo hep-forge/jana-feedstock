@@ -41,9 +41,12 @@ requirements:
 
 test:
   commands:
-    # jana.cc's --version handler intentionally `return -1;` (exit 255) after
-    # printing, so a plain `jana --version` always registers as a test failure.
-    - (jana --version; test $? -eq 255)
+    # jana.cc's --version handler intentionally `return -1;` after printing,
+    # so a plain `jana --version` always registers as a test failure. `!`
+    # negation is explicitly exempt from conda-build's `set -e` test runner
+    # (unlike `(cmd; test $?...)`, which still aborts on cmd's own nonzero
+    # exit before the check ever runs -- confirmed by reproducing locally).
+    - "! jana --version"
     - test -f ${PREFIX}/lib/libJANA.so        # [linux]
     - test -f ${PREFIX}/lib/libJANA.dylib     # [osx]
 
