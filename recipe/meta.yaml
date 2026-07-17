@@ -11,6 +11,15 @@ build:
   number: 0
   string: "root{{ root.replace('.', '') }}"
   skip: true  # [win]
+  # BUILD_EXAMPLES defaults ON and unconditionally builds
+  # examples/misc/RootDatamodelExample, whose ROOT_GENERATE_DICTIONARY()
+  # installs a precompiled ROOT dictionary cache (lib/*.pcm). conda-build's
+  # default prefix-relocation does a naive text substitution on every
+  # installed file it doesn't know to skip, which corrupts that binary
+  # format. Same fix as root-feedstock/root-plus-feedstock use for the
+  # identical artifact.
+  ignore_prefix_files:
+    - lib/*.pcm
 
 package:
   name: {{ environ.get('ANACONDA_PACKAGE', "jana2")|string|lower }}
