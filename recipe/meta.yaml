@@ -42,6 +42,7 @@ requirements:
   host:
     - root {{ root }}.*
     - zeromq
+    - cppzmq       # JANA >= 2026.03 find_package(cppzmq)
     - podio
     - xerces-c
   run:
