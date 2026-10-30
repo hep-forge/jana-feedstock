@@ -15,8 +15,8 @@ JANA2 is a C++ framework for multi-threaded HENP event reconstruction.
 
 | Architecture | Latest published |
 |--------------|------------------|
-| linux-amd64 (`linux-64`) | ✅ `2026.02.00` |
-| linux-arm64 (`linux-aarch64`) | ✅ `2026.02.00` |
+| linux-amd64 (`linux-64`) | ✅ `2026.03.01` |
+| linux-arm64 (`linux-aarch64`) | ✅ `2026.03.01` |
 
 _As of the last feedstock render; the badges above are live._
 
