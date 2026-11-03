@@ -10,10 +10,10 @@ cd build-scripts
 cmake "$RECIPE_DIR/scripts"
 cd ..
 
-# Some headers use std::exception_ptr without <exception>; libc++ does not
-# pull it in through other headers.
+# Some headers use std::exception_ptr and std::nothrow without <exception>
+# and <new>; libc++ does not pull them in through other headers.
 if [[ "$(uname)" == "Darwin" ]]; then
-    export CXXFLAGS="${CXXFLAGS} -include exception"
+    export CXXFLAGS="${CXXFLAGS} -include exception -include new"
 fi
 
 cmake -S . -B build \
