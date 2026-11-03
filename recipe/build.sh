@@ -10,6 +10,12 @@ cd build-scripts
 cmake "$RECIPE_DIR/scripts"
 cd ..
 
+# Some headers use std::exception_ptr without <exception>; libc++ does not
+# pull it in through other headers.
+if [[ "$(uname)" == "Darwin" ]]; then
+    export CXXFLAGS="${CXXFLAGS} -include exception"
+fi
+
 cmake -S . -B build \
     -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
     -DCMAKE_BUILD_TYPE=Release \
