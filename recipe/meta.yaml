@@ -40,13 +40,14 @@ requirements:
     - cmake
     - make
   host:
-    - root {{ root }}.*
+    - root_base {{ root }}.* cxx{{ root_cxx_standard }}*
+    - python
     - zeromq
     - cppzmq       # JANA >= 2026.03 find_package(cppzmq)
     - podio
     - xerces-c
   run:
-    - root {{ root }}.*
+    - {{ pin_compatible('root_base', exact=True) }}
     - zeromq
     - podio
     - xerces-c
